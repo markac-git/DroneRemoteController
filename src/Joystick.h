@@ -12,7 +12,7 @@ public:
     this->yPin = yPin;
     detectCenterPosition();
 
-    button = new Button(buttonPin);
+    button = new Button(buttonPin); //instantiating object
   };
 
   void setName(String s) { this->name = s; }

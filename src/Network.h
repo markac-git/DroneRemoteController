@@ -4,12 +4,13 @@
 #include "WiFi.h"
 #include "AsyncUDP.h"
 
-const char * ssid = "TELLO-FE3279";
+//const char * ssid = "TELLO-FE3279";
+//const char * password = "";
+
+const char * ssid = "TP-LINK_8C47";
 const char * password = "";
 
-
 AsyncUDP udp;
-
 
 class Network {
 public:
@@ -18,8 +19,9 @@ public:
 
 void sendMessage(String msg){
   udp.writeTo((const uint8_t *)msg.c_str(), msg.length(),
-              IPAddress(192, 168, 10, 1), 8889);
+              IPAddress(192, 168, 0, 103), 7000);
 }
+
 
 void init(){
     Serial.println("Initializing WiFi Connection ...");
@@ -28,7 +30,7 @@ void init(){
     if (WiFi.waitForConnectResult() != WL_CONNECTED) {
     Serial.println("WiFi Failed");
     delay(5000);
-    init();
+    init(); //recursion
   } else {
     Serial.println("WiFi Connected");
     sendMessage("command");
